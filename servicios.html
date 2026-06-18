@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Safeguard for window.fetch override error in sandboxed/iframe/extension environments
+      (function() {
+        window.addEventListener('error', function(event) {
+          if (event.message && (event.message.includes('property fetch') || event.message.includes('getter') || event.message.includes('Window'))) {
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        try {
+          const originalFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return originalFetch; },
+            set: function(val) { console.warn('Safe-guard: Blocked override attempt on window.fetch'); },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="https://i0.wp.com/www.gctmva.com.mx/wp-content/uploads/2017/03/cropped-LOGO-GCT-1.png?f=webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Servicios - GCT MVA</title>
+    <!-- CDN Tailwind CSS and Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#00022A',
+              accent: '#0066FF',
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      
+      ::selection {
+        background: #0066FF;
+        color: white;
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 transparent;
+      }
+      .glass {
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .section-padding {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      @media (min-width: 768px) {
+        .section-padding {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      .tech-grid {
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/205/svg'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z' fill='%23ffffff' fill-opacity='.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body class="bg-white text-slate-900 font-sans antialiased selection:bg-accent/20">
+    <!-- Navbar Wrapper -->
+    <header class="fixed top-0 left-0 right-0 z-[60] transition-transform duration-300 ease-in-out" id="main-header">
+      <!-- Top Bar -->
+      <div class="hidden lg:block bg-[#00022A] text-white text-[10px] border-b border-white/10 py-2.5 transition-all duration-300 overflow-hidden" id="top-bar">
+        <div class="w-full px-4 md:px-8 lg:px-12 flex justify-between items-center">
+          <div class="flex items-center gap-8">
+            <a href="mailto:ventas@gctmva.com.mx" class="flex items-center gap-2 hover:text-[#0066FF] transition-colors">
+              <i data-lucide="mail" class="w-3.5 h-3.5"></i> ventas@gctmva.com.mx
+            </a>
+            <span class="flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#0066FF]"></i> Av. Monterrey L-213, Monclova, Coah.
+            </span>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="tel:8661775800" class="flex items-center gap-2 hover:text-[#0066FF] transition-colors">
+              <i data-lucide="phone" class="w-3.5 h-3.5"></i> 866-177-5800
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="w-full bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.08)] flex items-center py-4 md:py-5 border-b border-slate-200/40" id="main-nav">
+        <div class="w-full px-4 md:px-8 lg:px-12 flex items-center justify-between">
+          <div class="flex-1 flex justify-start">
+            <a href="index.html" class="group shrink-0 relative">
+              <img 
+                src="https://i0.wp.com/www.gctmva.com.mx/wp-content/uploads/2017/03/cropped-LOGO-GCT-1.png?f=webp" 
+                alt="GCT Logo" 
+                class="h-10 md:h-12 lg:h-14 object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-sm"
+                referrerpolicy="no-referrer"
+              />
+            </a>
+          </div>
+
+          <div class="hidden md:flex items-center justify-center gap-10 lg:gap-14 font-extrabold text-slate-800">
+            <a href="index.html" class="relative py-2 transition-all duration-300 text-[11px] lg:text-xs uppercase tracking-[0.25em] hover:text-[#0066FF] whitespace-nowrap">
+              Inicio
+              <span class="absolute -bottom-2 left-0 w-full h-[3px] bg-[#0066FF] transform scale-x-0 transition-transform duration-500 origin-left"></span>
+            </a>
+            <a href="nosotros.html" class="relative py-2 transition-all duration-300 text-[11px] lg:text-xs uppercase tracking-[0.25em] hover:text-[#0066FF] whitespace-nowrap">
+              Conócenos
+              <span class="absolute -bottom-2 left-0 w-full h-[3px] bg-[#0066FF] transform scale-x-0 transition-transform duration-500 origin-left"></span>
+            </a>
+            <a href="servicios.html" class="relative py-2 text-[#0066FF] text-[11px] lg:text-xs uppercase tracking-[0.25em] whitespace-nowrap">
+              Servicios
+              <span class="absolute -bottom-2 left-0 w-full h-[3px] bg-[#0066FF] transform scale-x-100 transition-transform duration-500 origin-left"></span>
+            </a>
+          </div>
+
+          <div class="hidden md:flex flex-1 justify-end">
+            <a 
+              href="contacto.html"
+              class="relative overflow-hidden group bg-gradient-to-r from-[#00022A] to-blue-700 text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span class="relative z-10">Contacto</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+          </div>
+
+          <button 
+            id="btn-open-menu"
+            class="md:hidden p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all active:scale-90 border border-slate-200/50" 
+            aria-label="Abrir menú"
+          >
+            <i data-lucide="menu" class="w-7 h-7 text-slate-800"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[100] flex flex-col shadow-2xl transition-all duration-300 translate-x-full opacity-0 pointer-events-none">
+      <div class="flex justify-between items-center p-5 border-b border-slate-100">
+        <a href="index.html" class="shrink-0">
+          <img 
+            src="https://i0.wp.com/www.gctmva.com.mx/wp-content/uploads/2017/03/cropped-LOGO-GCT-1.png?f=webp" 
+            alt="GCT Logo" 
+            class="h-10 object-contain"
+            referrerpolicy="no-referrer"
+          />
+        </a>
+        <button 
+          id="btn-close-menu"
+          class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all active:scale-95 border border-slate-100"
+          aria-label="Cerrar menú"
+        >
+          <i data-lucide="x" class="w-6 h-6 text-slate-800"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 flex flex-col justify-between overflow-y-auto p-6 md:p-8">
+        <div class="flex flex-col gap-3">
+          <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-2">Menú de Navegación</p>
+          <a href="index.html" class="flex items-center justify-between p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 text-slate-700 font-bold">
+            <span class="text-base tracking-wide">Inicio</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </a>
+          <a href="nosotros.html" class="flex items-center justify-between p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 text-slate-700 font-bold">
+            <span class="text-base tracking-wide">Conócenos</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </a>
+          <a href="servicios.html" class="flex items-center justify-between p-4 rounded-2xl border bg-primary/5 border-primary/20 text-[#00022A] font-black">
+            <span class="text-base tracking-wide">Servicios</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-[#0066FF]"></i>
+          </a>
+        </div>
+
+        <div class="mt-8 border-t border-slate-100 pt-8 flex flex-col gap-5">
+          <a 
+            href="contacto.html"
+            class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#00022A] to-blue-700 text-white py-4 rounded-2xl font-black text-sm uppercase tracking-wider shadow-lg shadow-primary/25"
+          >
+            <i data-lucide="mail" class="w-5 h-5"></i> Contáctanos
+          </a>
+          
+          <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col gap-4 text-center">
+            <div class="mx-auto w-11 h-11 bg-blue-50 text-accent rounded-full flex items-center justify-center shadow-inner">
+              <i data-lucide="phone" class="w-5 h-5 text-[#0066FF]"></i>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Línea de Atención Directa</span>
+              <a href="tel:8661775800" class="text-xl font-extrabold text-[#00022A] hover:underline hover:text-accent select-all block mt-1">
+                866-177-5800
+              </a>
+              <span class="text-[11px] text-slate-500 block mt-1">Lunes a Viernes 9am - 6pm | Sábados 9am - 1pm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN BODY CONTENT -->
+    <main class="bg-[#070a13] text-white min-h-screen">
+      <!-- Header Section -->
+      <section class="relative h-[400px] md:h-[450px] pt-36 md:pt-44 flex items-center justify-center overflow-hidden bg-slate-900 text-white">
+        <div class="absolute inset-0 z-0">
+          <img 
+            src="/src/assets/images/regenerated_image_1778706747032.png" 
+            alt="Services Background" 
+            class="w-full h-full object-cover opacity-30"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-slate-900/50 to-slate-900"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-6">
+          <div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6">Servicios</h1>
+            <div class="flex items-center justify-center gap-4 text-slate-300">
+              <span class="hover:text-white transition-colors cursor-pointer">Inicio</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <span class="text-accent font-bold">Servicios</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Maturity Analysis Section - Tech Dark Theme -->
+      <section class="relative bg-[#090d16] py-20 md:py-28 overflow-hidden border-t border-slate-900">
+        <!-- Subtle grid background -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z' fill='%23ffffff' fill-opacity='.1' fill-rule='evenodd'/%3E%3C/svg%3E&quot;)"></div>
+        <!-- Radial ambient lighting -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-screen-2xl mx-auto px-6 relative z-10">
+          <div class="text-center mb-16 md:mb-24">
+            <span class="text-xs font-black text-accent tracking-widest uppercase mb-3 block">Excelencia en TI</span>
+            <h2 id="services-maturity-title" class="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+              Análisis de Nivel de Madurez Tecnológica
+            </h2>
+            <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-semibold">
+              Evaluamos y optimizamos los pilares críticos de su organización para impulsar una madurez tecnológica sostenible, logrando que la tecnología sea el verdadero motor de su negocio.
+            </p>
+            <div class="w-24 h-1 bg-gradient-to-r from-accent to-blue-500 mx-auto rounded-full mt-6"></div>
+          </div>
+
+          <!-- Conceptual Map Style for Maturity Factors - Tech Glowing Cards -->
+          <div class="relative mb-24 max-w-7xl lg:max-w-none mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+              
+              <!-- Card 1: Resultados con valor -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-emerald-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(16,185,129,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(16,185,129,0.25)] hover:border-emerald-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-emerald-400 border-emerald-500/30 select-none">
+                      PARA OBTENER RESULTADOS CON VALOR
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-emerald-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1779475179329.png" 
+                      alt="Resultados con valor" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Resultados con valor</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Medimos el impacto real de cada inversión en TI, garantizando retornos medibles y alineando los flujos de TI directamente con sus metas comerciales.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 2: Trabajo -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-rose-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(244,63,94,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(244,63,94,0.25)] hover:border-rose-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-rose-400 border-rose-500/30 select-none">
+                      TRABAJANDO CON LOS MEJORES EQUIPOS
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-rose-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1779474946062.png" 
+                      alt="Trabajo" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Trabajo</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Optimizamos el flujo de trabajo colaborativo e integramos profesionales de TI certificados para garantizar una ejecución técnica impecable.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 3: Soluciones -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-cyan-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(6,182,212,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(6,182,212,0.25)] hover:border-cyan-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-cyan-400 border-cyan-500/30 select-none">
+                      INTEGRACIÓN DE SOLUCIONES
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-cyan-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1778785495442.png" 
+                      alt="Soluciones" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Soluciones</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Diseñamos e implementamos arquitecturas de software y hardware a medida que resuelven cuellos de botella operativos y habilitan crecimiento continuo.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 4: Personal -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-blue-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(59,130,246,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(59,130,246,0.25)] hover:border-blue-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-blue-400 border-blue-500/30 select-none">
+                      POTENCIANDO EL TALENTO DIRECTO
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-blue-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1778786950225.png" 
+                      alt="Personal" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Personal</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Capacitamos constantemente a sus colaboradores para maximizar el uso seguro de las herramientas digitales y el apego a políticas corporativas.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 5: Procesos -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-purple-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(168,85,247,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(168,85,247,0.25)] hover:border-purple-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-purple-400 border-purple-500/30 select-none">
+                      METODOLOGÍAS DE TRABAJO E INTERACCIÓN
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-purple-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1779474949532.png" 
+                      alt="Procesos" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Procesos</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Estandarizamos, documentamos y auditamos flujos operativos basados en marcos ágiles e ITIL para eliminar redundancias fatales.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 6: Infraestructura -->
+              <div class="group relative bg-slate-950/50 backdrop-blur-xl rounded-[2rem] border border-lime-500/20 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_35px_-10px_rgba(132,204,22,0.02)] hover:shadow-[0_15px_45px_-5px_rgba(132,204,22,0.25)] hover:border-lime-500/60">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none"></div>
+                <div>
+                  <div class="flex items-center gap-2 mb-6 justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-lime-500 animate-pulse"></span>
+                    <span class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase bg-slate-900/90 px-3 py-1.5 rounded-full border text-lime-400 border-lime-500/30 select-none">
+                      INFRAESTRUCTURA DE VANGUARDIA
+                    </span>
+                  </div>
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-gradient-to-b from-lime-950/20 to-slate-900/40 p-4 flex items-center justify-center">
+                    <img 
+                      src="/src/assets/images/regenerated_image_1778785713830.png" 
+                      alt="Infraestructura" 
+                      class="w-[90%] h-[90%] object-contain transition-all duration-700 scale-95 group-hover:scale-105 group-hover:rotate-1"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h4 class="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-accent transition-colors duration-300">Infraestructura</h4>
+                  <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                    Desplegamos redes estructuradas, CCTV, telecomunicaciones y sistemas de cómputo robustos con los más altos estándares tecnológicos.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Premium Analysis Cards Section -->
+          <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 mb-8">
+            <!-- Card 1 -->
+            <div class="group bg-slate-950/30 backdrop-blur-md p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] border border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-950/50 shadow-2xl transition-all duration-300">
+              <div class="p-4 bg-slate-900 border border-slate-800 shadow-lg rounded-2xl w-fit mb-8 group-hover:scale-110 transition-transform">
+                <i data-lucide="shield-alert" class="w-8 h-8 text-accent animate-pulse"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white mb-6 leading-tight">
+                Análisis de Vulnerabilidad
+              </h3>
+              <ul class="space-y-4">
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Seguridad Informática</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Controles de acceso</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Auditoria de flujos</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">CCTV DRP respaldos de información</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Procesos</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Cumplimientos</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="group bg-slate-950/30 backdrop-blur-md p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] border border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-950/50 shadow-2xl transition-all duration-300">
+              <div class="p-4 bg-slate-900 border border-slate-800 shadow-lg rounded-2xl w-fit mb-8 group-hover:scale-110 transition-transform">
+                <i data-lucide="briefcase" class="w-8 h-8 text-accent animate-pulse"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white mb-6 leading-tight">
+                Administración de Proyectos TI
+              </h3>
+              <ul class="space-y-4">
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">CCTV</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Redes de información</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Sitios de TI</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Renovación tecnológica</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Cómputo distribuido</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Capacitación TI</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Implementación y cambios de TI</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="group bg-slate-950/30 backdrop-blur-md p-6 sm:p-10 rounded-3xl sm:rounded-[2.5rem] border border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-950/50 shadow-2xl transition-all duration-300">
+              <div class="p-4 bg-slate-900 border border-slate-800 shadow-lg rounded-2xl w-fit mb-8 group-hover:scale-110 transition-transform">
+                <i data-lucide="layout-dashboard" class="w-8 h-8 text-accent animate-pulse"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white mb-6 leading-tight">
+                Tableros de Control
+              </h3>
+              <ul class="space-y-4">
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Desarrollo de Tableros Web</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Dashboards automatizados</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Análisis de Datos (KPI)</span>
+                </li>
+                <li class="flex items-start gap-3 text-slate-300">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                  <span class="font-semibold text-xs sm:text-sm">Geometricas</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Strategic Vision Section -->
+      <section class="bg-slate-900 text-white py-24">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+          <div>
+            <h2 class="text-4xl md:text-6xl font-black mb-10 leading-tight">
+              Una pieza <span class="text-accent underline underline-offset-8">estratégica</span> en la cadena de negocio.
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed font-semibold">
+              Porque hoy no basta con sobrevivir en los mercados, GCT apoya a las organizaciones alineando factores críticos de éxito, convirtiéndolos en un diferenciador de su nicho de negocio.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-white pt-20 pb-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div class="col-span-1 lg:col-span-1">
+            <img 
+              src="https://i0.wp.com/www.gctmva.com.mx/wp-content/uploads/2017/03/cropped-LOGO-GCT-1.png?f=webp" 
+              alt="GCT Logo" 
+              class="h-10 mb-8 brightness-0 invert"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+            <p class="text-slate-400 text-sm leading-relaxed mb-8 font-semibold">
+              GCT Asesores en Tecnología. Soluciones integrales para la infraestructura y conectividad de tu empresa.
+            </p>
+            <div class="flex gap-4">
+              <a href="https://www.facebook.com/GCTMVA/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sky-600 transition-colors" title="Facebook">
+                <i data-lucide="facebook" class="w-5 h-5"></i>
+              </a>
+              <a href="https://www.instagram.com/mvagct" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-pink-600 transition-colors" title="Instagram">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/gctmva" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-700 transition-colors" title="LinkedIn">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="font-bold mb-8 text-lg">Servicios</h5>
+            <ul class="space-y-4 text-slate-400 text-sm font-semibold">
+              <li><a href="index.html#services" class="hover:text-white transition-colors">Infraestructura</a></li>
+              <li><a href="index.html#services" class="hover:text-white transition-colors">Seguridad CCTV</a></li>
+              <li><a href="index.html#services" class="hover:text-white transition-colors">Desarrollo Web</a></li>
+              <li><a href="index.html#services" class="hover:text-white transition-colors">Internet Dedicado</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="font-bold mb-8 text-lg">Contacto</h5>
+            <ul class="space-y-4 text-slate-400 text-sm font-semibold">
+              <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-[#0066FF]"></i> ventas@gctmva.com.mx</li>
+              <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-[#0066FF]"></i> 866-177-5800</li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="map-pin" class="w-4 h-4 text-[#0066FF] mt-0.5"></i> 
+                <span>Av. Monterrey L-213, Col. Guadalupe, <br />CP 25750, Monclova, Coah.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="font-bold mb-8 text-lg">Horarios</h5>
+            <p class="text-slate-400 text-sm mb-2 font-semibold">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+            <p class="text-[#0066FF] text-sm mb-4 font-bold">Sábados: 9:00 AM - 1:00 PM</p>
+            <p class="text-slate-400 text-sm font-semibold">Nuestro equipo está listo para ayudarte con soporte remoto o presencial.</p>
+          </div>
+        </div>
+
+        <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-xs font-semibold">
+          <p>Copyright © 2026 GCTMVA. Todos los derechos reservados.</p>
+          <div class="flex gap-8">
+            <a href="#" class="hover:text-white transition-colors">Aviso de Privacidad</a>
+            <a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- NAVBAR AND MENU HANDLERS -->
+    <script>
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Header Scroll animations
+      const header = document.getElementById('main-header');
+      const topBar = document.getElementById('top-bar');
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        
+        // Hide topBar
+        if (currentScrollY > 50) {
+          topBar.classList.add('max-h-0', 'opacity-0', 'py-0');
+          topBar.classList.remove('max-h-12', 'opacity-100', 'py-2.5');
+        } else {
+          topBar.classList.remove('max-h-0', 'opacity-0', 'py-0');
+          topBar.classList.add('max-h-12', 'opacity-100', 'py-2.5');
+        }
+
+        // Hide main header on down scroll, show on up scroll
+        if (currentScrollY > lastScrollY && currentScrollY > 150) {
+          header.classList.add('-translate-y-full');
+        } else {
+          header.classList.remove('-translate-y-full');
+        }
+        
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      // Mobile Menu functionality
+      const openBtn = document.getElementById('btn-open-menu');
+      const closeBtn = document.getElementById('btn-close-menu');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      openBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+      });
+    </script>
+  </body>
+</html>

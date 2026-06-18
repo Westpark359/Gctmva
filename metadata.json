@@ -1,0 +1,6 @@
+{
+  "name": "GCT - Asesores en Tecnología",
+  "description": "Servicios de TI, infraestructura, seguridad CCTV y desarrollo web. Soluciones tecnológicas a medida para tu empresa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
