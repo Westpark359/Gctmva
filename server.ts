@@ -29,9 +29,12 @@ async function startServer() {
       return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
+    const username = (process.env.EMAIL_USER || process.env.SMTP_USER || "")?.trim();
+    const password = (process.env.EMAIL_PASS || process.env.SMTP_PASS || "")?.replace(/\s+/g, "");
+
     // Check if secrets are configured
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.warn("EMAIL_USER or EMAIL_PASS missing. Entering Simulation Mode.");
+    if (!username || !password) {
+      console.warn("EMAIL_USER/SMTP_USER or EMAIL_PASS/SMTP_PASS missing. Entering Simulation Mode.");
       return res.json({ 
         success: true, 
         simulated: true,
@@ -39,23 +42,56 @@ async function startServer() {
       });
     }
 
-    console.log(`Configurado: User=${process.env.EMAIL_USER.substring(0, 3)}... Pass=${process.env.EMAIL_PASS.length} chars`);
+    console.log(`Configurado: User=${username.substring(0, 3)}... Pass=${password.length} chars`);
 
     const recipient = process.env.EMAIL_TO || "ventas@gctmva.com.mx";
 
     try {
-      console.log(`Intentando enviar correo desde ${process.env.EMAIL_USER} para ${recipient}`);
+      console.log(`Intentando enviar correo desde ${username} para ${recipient}`);
       
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.EMAIL_USER?.trim(),
-          pass: process.env.EMAIL_PASS?.replace(/\s+/g, ""),
-        },
-      });
+      let transporterConfig: any;
+
+      const smtpHost = process.env.EMAIL_HOST || process.env.SMTP_HOST;
+      const smtpPort = process.env.EMAIL_PORT || process.env.SMTP_PORT;
+      const smtpSecureValue = process.env.EMAIL_SECURE || process.env.SMTP_SECURE;
+
+      if (smtpHost) {
+        // Generic custom SMTP transport configuration
+        const port = smtpPort ? parseInt(smtpPort, 10) : 587;
+        let secure = port === 465;
+        if (smtpSecureValue !== undefined) {
+          secure = smtpSecureValue === "true" || smtpSecureValue === "1" || smtpSecureValue === "yes";
+        }
+
+        transporterConfig = {
+          host: smtpHost.trim(),
+          port: port,
+          secure: secure,
+          auth: {
+            user: username,
+            pass: password,
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        };
+        console.log(`Using custom SMTP transport: ${smtpHost.trim()}:${port} (secure: ${secure})`);
+      } else {
+        // Fallback to traditional Gmail service configuration if no custom host is defined
+        transporterConfig = {
+          service: 'gmail',
+          auth: {
+            user: username,
+            pass: password,
+          },
+        };
+        console.log(`Using Gmail SMTP service fallback`);
+      }
+
+      const transporter = nodemailer.createTransport(transporterConfig);
 
       const mailOptions = {
-        from: `"GCT Web Contact" <${process.env.EMAIL_USER}>`,
+        from: `"GCT Web Contact" <${username}>`,
         to: recipient,
         replyTo: email,
         subject: `[WEB] Contacto: ${name} - ${subject}`,
