@@ -1,6 +1,6 @@
 {
-  "name": "GCT,
-  "description": "Asesores en Tecnología"",
+  "name": "GCT",
+  "description": "Asesores en Tecnología",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
